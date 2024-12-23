@@ -6,18 +6,16 @@ class Usuario {
 
     constructor(nome, senha) {
         this.Nome = nome
-        this.Senha = senha
     }
 }
 
-function Cadastrar(nome, senha, contador, usuarios) {
+Cadastrar(nome, senha, contador) {
     usuarios[contador] = new Usuario(nome, senha)
-    contador++
 }
 
-function Login(nome, senha, usuarios) {
+Login(){
     for (let i = 0; i < usuarios.length; i++) {
-        if (nome == usuarios[i].Nome && senha == usuarios[i].Senha) {
+        if (nome == usuarios[i].nome && senha == usuarios[i].senha) {
             return true
         }
 
@@ -25,9 +23,9 @@ function Login(nome, senha, usuarios) {
     return false
 }
 
-function Deletar(nome, senha, usuarios) {
+Deletar(){
     for (let i = 0; i < usuarios.length; i++) {
-        if (nome == usuarios[i].Nome && senha == usuarios[i].Senha) {
+        if (nome == usuarios[i].nome && senha == usuarios[i].senha) {
             usuarios[i] = undefined
             return true
         }
@@ -39,28 +37,28 @@ let ListaUsuarios = []
 let contadorUsuarios = 0
 let continuar = true
 
-while (continuar) {
-    let opcao = Number(prompt("Escolha a opção desejada: 1 - Cadastro, 2 - Login, 3 - Deletar cadastro"))
+while (continuar != true) {
+    let opcao = prompt("Escolha a opção desejada: 1 - Cadastro, 2 - Login, 3 - Deletar cadastro")
     let nomeUsuario = prompt("insira o nome do usuário")
     let senhaUsuario = prompt("insira a senha do usuário")
     switch (opcao) {
         case 1:
-            Cadastrar(nomeUsuario, senhaUsuario, contadorUsuarios, ListaUsuarios)
+            Cadastrar()
             alert("Usuário cadastrado")
             break;
 
         case 2:
-            let login = Login(nomeUsuario, senhaUsuario, ListaUsuarios)
-            if (!login) {
+            let login = Login()
+            if (login) {
                 alert("Usuário ou senha inválidos")
             } else {
                 alert("Login concluído!")
             }
             break;
-
+            
         case 3:
-            let deletar = Deletar(nomeUsuario, senhaUsuario, ListaUsuarios)
-            if (!deletar) {
+            let deletar = Deletar()
+            if (deletar) {
                 alert("Usuário ou senha inválidos")
             } else {
                 alert("Usuário Deletado!")
@@ -70,10 +68,5 @@ while (continuar) {
         default:
             alert("Opção inválida")
             break;
-    }
-
-    let continuarString = prompt("Deseja continuar? s/n")
-    if (continuarString != "s") {
-        continuar = false
     }
 }
